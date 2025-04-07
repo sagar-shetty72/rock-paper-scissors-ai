@@ -34,7 +34,7 @@ def main():
         ai_choice = get_smart_ai_choice(player_choice_counts, round_num)  # Smart AI picks a choice
         
         print(header)
-        game(player_choice, ai_choice, score, player_choice_counts)  # Determine winner
+        game(player_choice, ai_choice, score, player_choice_counts, round_num)  # Determine winner
         round_num += 1
 
 def get_player_choice():
@@ -101,7 +101,7 @@ def predict_player_choice(player_choice_counts):
     return counter[player_move]  # Returns the move that beats the player's most frequent choice
 
 
-def game(player, ai, score, player_choices):
+def game(player, ai, score, player_choices, round_num):
     """ Runs a single round, determines the winner, and updates scores. """
 
     # Winning combinations (Player Move, AI Move) -> Winning Move
@@ -122,7 +122,7 @@ def game(player, ai, score, player_choices):
         winner = "ai"
 
     update_scores(score, winner)  # Update the scoreboard
-    print_scores(score)
+    print_scores(score, round_num)
     print_player_choices(player_choices)
 
 
@@ -131,10 +131,10 @@ def update_scores(score, winner):
     score[winner] += 1
 
 
-def print_scores(score):
+def print_scores(score, round_num):
     """ Prints the scoreboard in a clean format. """
     
-    print("\n---- Scoreboard ----")
+    print(f"\n---- Round {round_num} -------")
     for key, value in score.items():
         print(f"{key.capitalize():<8} | {value}")
     print("--------------------\n")
