@@ -111,6 +111,8 @@ def game(player, ai, score, player_choices, round_num):
         ("paper", "rock"): "paper"
     }
 
+    print() # Empty line for formatting
+
     if player == ai:
         print("Draw!")
         winner = "ties"
@@ -144,7 +146,7 @@ def print_player_choices(player_choices):
     """ Displays player's choice distribution percentages. """
 
     total = sum(player_choices.values())
-
+    print() # Empty line for formatting
     # Prints choices sorted by most frequent, with percentages
     print(" | ".join(f"{k} : {(v / total * 100):.2f}%" 
                   for k, v in sorted(player_choices.items(), key=lambda item: item[1], reverse=True)))
