@@ -147,10 +147,10 @@ def print_player_choices(player_choices):
     """ Displays player's choice distribution percentages. """
 
     total = sum(player_choices.values())
-    print() # Empty line for formatting
     # Prints choices sorted by most frequent, with percentages
     print(" | ".join(f"{k} : {(v / total * 100):.2f}%" 
                   for k, v in sorted(player_choices.items(), key=lambda item: item[1], reverse=True)))
+    print() # Empty line for formatting
 
 
 def update_choice_counts(choice_counts, choice):
