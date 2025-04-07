@@ -32,16 +32,23 @@ def main():
 def get_player_choice():
     """ Prompts player for a choice, ensures input is valid. """
 
-    valid_choices = ["rock", "paper", "scissor"]
+    valid_choices = {
+        "rock":"rock",
+        "r":"rock",
+        "scissor":"scissor",
+        "s":"scissor",
+        "paper":"paper",
+        "p":"paper"
+    }
 
     while True:
         try:
-            choice = input("Enter your choice (rock, paper, scissor, or done): ").strip().lower()
+            choice = input("Enter your choice (r/p/s or the full word or done): ").strip().lower()
 
             if choice == "done":
                 sys.exit()  # Terminates game safely
             elif choice in valid_choices:
-                return choice
+                return valid_choices[choice]
             else:
                 continue  # Reprompt on invalid input
 
