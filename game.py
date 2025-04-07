@@ -127,6 +127,7 @@ def game(player, ai, score, player_choices, round_num):
     update_scores(score, winner)  # Update the scoreboard
     print_scores(score, round_num)
     print_player_choices(player_choices)
+    print_player_win_percent(score)
 
 
 def update_scores(score, winner):
@@ -152,6 +153,11 @@ def print_player_choices(player_choices):
                   for k, v in sorted(player_choices.items(), key=lambda item: item[1], reverse=True)))
     print() # Empty line for formatting
 
+def print_player_win_percent(score):
+
+    win_percent = score["player"]/sum(score.values())
+    print(f"Your win %: {win_percent*100:.2f}%")
+    print()
 
 def update_choice_counts(choice_counts, choice):
     """ Updates player choice count dictionary. """
