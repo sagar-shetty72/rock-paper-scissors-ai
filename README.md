@@ -35,7 +35,8 @@ A Python-based Rock Paper Scissors game featuring an AI opponent that adapts to 
    cd rock-paper-scissors-ai
    ```
 3. Create a virtual environment and activate it:
-   ```python3 -m venv venv
+   ```
+   python3 -m venv venv
    ```
    ```
    source venv/bin/activate
