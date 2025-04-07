@@ -115,13 +115,13 @@ def game(player, ai, score, player_choices, round_num):
     print() # Empty line for formatting
 
     if player == ai:
-        print("Draw!")
+        print(f"You both chose {player}! It's a draw.")
         winner = "ties"
     elif (player, ai) in winning_combinations:
-        print(f"{winning_combinations[(player, ai)]} wins! Player is triumphant.")
+        print(f"You chose {winning_combinations[(player, ai)]} and computer chose {ai}. Player prevails.")
         winner = "player"
     else:
-        print(f"{ai} wins! Computer is triumphant.")
+        print(f"Computer chose {ai} and you chose {player}! Computer is triumphant.")
         winner = "ai"
 
     update_scores(score, winner)  # Update the scoreboard
