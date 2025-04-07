@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 import random
 import sys
 import os
@@ -34,7 +35,7 @@ def main():
         ai_choice = get_smart_ai_choice(player_choice_counts, round_num)  # Smart AI picks a choice
         
         print() #Empty line for formatting
-        print(header)
+        print(Fore.CYAN + header + Style.RESET_ALL)
         game(player_choice, ai_choice, score, player_choice_counts, round_num)  # Determine winner
         round_num += 1
 
@@ -115,13 +116,13 @@ def game(player, ai, score, player_choices, round_num):
     print() # Empty line for formatting
 
     if player == ai:
-        print(f"You both chose {player}! It's a draw.")
+        print(Fore.YELLOW + f"You both chose {player}! It's a draw." + Style.RESET_ALL)
         winner = "ties"
     elif (player, ai) in winning_combinations:
-        print(f"You chose {winning_combinations[(player, ai)]} and computer chose {ai}. Player prevails.")
+        print(Fore.GREEN + f"You chose {winning_combinations[(player, ai)]} and computer chose {ai}. Player prevails." + Style.RESET_ALL)
         winner = "player"
     else:
-        print(f"Computer chose {ai} and you chose {player}! Computer is triumphant.")
+        print(Fore.RED + f"Computer chose {ai} and you chose {player}! Computer is triumphant." + Style.RESET_ALL)
         winner = "ai"
 
     update_scores(score, winner)  # Update the scoreboard
@@ -138,7 +139,7 @@ def update_scores(score, winner):
 def print_scores(score, round_num):
     """ Prints the scoreboard in a clean format. """
     
-    print(f"\n---- Round {round_num} -------")
+    print(Fore.MAGENTA + f"\n---- Round {round_num} -------" + Style.RESET_ALL)
     for key, value in score.items():
         print(f"{key.capitalize():<8} | {value}")
     print("--------------------\n")
@@ -149,7 +150,7 @@ def print_player_choices(player_choices):
 
     total = sum(player_choices.values())
     # Prints choices sorted by most frequent, with percentages
-    print("Your choice distribution")
+    print(Fore.BLUE + "Your choice distribution" + Style.RESET_ALL)
     print(" | ".join(f"{k} : {(v / total * 100):.2f}%" 
                   for k, v in sorted(player_choices.items(), key=lambda item: item[1], reverse=True)))
     print() # Empty line for formatting
