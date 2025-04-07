@@ -36,13 +36,18 @@ A Python-based Rock Paper Scissors game featuring an AI opponent that adapts to 
    ```
 3. Create a virtual environment and activate it:
    ```python3 -m venv venv
-      source venv/bin/activate
+   ```
+   ```
+   source venv/bin/activate
+
    ```
 4. Install dependencies
-   ```pip install -r requirements.txt
+   ```
+   pip install -r requirements.txt
    ```
 5. Run the game
-   ```python game.py
+   ```
+   python game.py
    ```
 
 ## Contributions
