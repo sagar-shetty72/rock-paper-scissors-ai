@@ -1,5 +1,8 @@
 import random
 import sys
+import os
+
+header = "=== ROCK PAPER SCISSORS AI ==="
 
 def main():
     """ Main function to handle game loop and tracking scores. """
@@ -22,10 +25,15 @@ def main():
 
     while True:
         player_choice = get_player_choice()
+        
+        if round != 0:
+            clear_screen()
+
         update_choice_counts(player_choice_counts, player_choice)
         
         ai_choice = get_smart_ai_choice(player_choice_counts, round)  # Smart AI picks a choice
         
+        print(header)
         game(player_choice, ai_choice, score, player_choice_counts)  # Determine winner
         round += 1
 
@@ -46,6 +54,7 @@ def get_player_choice():
             choice = input("Enter your choice (r/p/s or the full word or done): ").strip().lower()
 
             if choice == "done":
+                clear_screen()
                 sys.exit()  # Terminates game safely
             elif choice in valid_choices:
                 return valid_choices[choice]
@@ -145,6 +154,9 @@ def update_choice_counts(choice_counts, choice):
     """ Updates player choice count dictionary. """
     choice_counts[choice] += 1 
 
+def clear_screen():
+    # Clears the terminal screen for better readability between rounds
+    os.system("cls" if os.name == "nt" else "clear")
 
 if __name__ == "__main__":
     main()  # Entry point for execution
