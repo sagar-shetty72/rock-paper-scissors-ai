@@ -9,7 +9,7 @@ A Python-based Rock Paper Scissors game featuring an AI opponent that adapts to 
 - **Smart Counterplay**: AI attempts to counter the player's most frequent move.
 
 ## Future Improvements
-1. **UI Enhancements**: Improve game output for clarity and user experience.
+1. ~~**UI Enhancements**: Improve game output for clarity and user experience.~~
 2. **Simulated Games**: Add an option to simulate games instead of manual play.
 3. **Advanced AI (Markov Chains)**: Implement predictive modeling for better AI decisions.
 4. **Custom Strategy Weights**: Allow users to adjust the AI’s strategy mix (e.g., 40% random, 60% predictive/Markov).
@@ -17,18 +17,32 @@ A Python-based Rock Paper Scissors game featuring an AI opponent that adapts to 
 6. **Game Data Logging**: Store match results for trend analysis.
 7. **Adaptive AI**: AI dynamically adjusts its strategy over multiple games.
 
+## What's New (April 5, 2025)
+- Added player win percentage display
+- Improved round and result formatting
+- Integrated color-coded CLI output (using Colorama)
+- Added shorthand input support (r/p/s)
+- Cleaned up scoreboard and game flow
+- Added .gitignore and requirements.txt for environment management
+
 ## Installation & Usage
 1. Clone this repository:
    ```sh
-   git clone https://github.com/yourusername/rock-paper-ai.git
+   git clone https://github.com/sagar-shetty72/rock-paper-scissors-ai.git
    ```
 2. Navigate to the project directory:
    ```sh
-   cd rock-paper-ai
+   cd rock-paper-scissors-ai
    ```
-3. Run the game:
-   ```sh
-   python game.py
+3. Create a virtual environment and activate it:
+   ```python3 -m venv venv
+      source venv/bin/activate
+   ```
+4. Install dependencies
+   ```pip install -r requirements.txt
+   ```
+5. Run the game
+   ```python game.py
    ```
 
 ## Contributions
