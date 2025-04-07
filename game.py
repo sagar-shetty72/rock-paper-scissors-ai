@@ -21,21 +21,21 @@ def main():
         "scissor": 0
     }
 
-    round = 0  # Keeps track of game rounds
+    round_num = 0  # Keeps track of game rounds
 
     while True:
         player_choice = get_player_choice()
         
-        if round != 0:
+        if round_num != 0:
             clear_screen()
 
         update_choice_counts(player_choice_counts, player_choice)
         
-        ai_choice = get_smart_ai_choice(player_choice_counts, round)  # Smart AI picks a choice
+        ai_choice = get_smart_ai_choice(player_choice_counts, round_num)  # Smart AI picks a choice
         
         print(header)
         game(player_choice, ai_choice, score, player_choice_counts)  # Determine winner
-        round += 1
+        round_num += 1
 
 def get_player_choice():
     """ Prompts player for a choice, ensures input is valid. """
@@ -73,13 +73,13 @@ def get_ai_choice():
     return random.choice(plays)
 
 
-def get_smart_ai_choice(player_choice_counts, round):
+def get_smart_ai_choice(player_choice_counts, round_num):
     """ Determines AI move: 70% predictive, 30% random. """
 
     strategy = random.choices(["random", "predictive"], weights=[0.3, 0.7])[0]  # 70% predictive AI
 
     # AI plays randomly for the first round since no data exists
-    if strategy == "random" or round == 0:
+    if strategy == "random" or round_num == 0:
         return get_ai_choice()
     else:
         return predict_player_choice(player_choice_counts)
