@@ -33,6 +33,7 @@ def main():
         
         ai_choice = get_smart_ai_choice(player_choice_counts, round_num)  # Smart AI picks a choice
         
+        print() #Empty line for formatting
         print(header)
         game(player_choice, ai_choice, score, player_choice_counts, round_num)  # Determine winner
         round_num += 1
