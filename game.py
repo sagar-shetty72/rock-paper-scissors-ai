@@ -40,22 +40,25 @@ game_state = {
 def main():
     print(Fore.CYAN + logo + Style.RESET_ALL)
 
-    print(Fore.YELLOW + "-" * 80 + Style.RESET_ALL)
+    print(Fore.WHITE + "-" * 80 + Style.RESET_ALL)
  
     while True:
-        choice = int(input("Pick your poison (1, 2, 3): "))
+        try:
+            choice = int(input("Pick your poison (1, 2, 3): "))
 
-        if choice == 1:
-            play_rounds(game_state)
-            break
-        elif choice == 2:
-            simulate(game_state)
-            break
-        elif choice == 3:
-            clear_screen()
-            sys.exit()
-        else:
-            continue  # Reprompt on invalid input
+            if choice == 1:
+                play_rounds(game_state)
+                break
+            elif choice == 2:
+                simulate(game_state)
+                break
+            elif choice == 3:
+                clear_screen()
+                sys.exit()
+            else:
+                continue  # Reprompt on invalid input
+        except ValueError:
+            continue 
 
 def simulate():
     print("test")
