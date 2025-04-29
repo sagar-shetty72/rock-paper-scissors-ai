@@ -10,7 +10,7 @@ A Python-based Rock Paper Scissors game featuring an AI opponent that adapts to 
 
 ## Future Improvements
 1. ~~**UI Enhancements**: Improve game output for clarity and user experience.~~
-2. **Simulated Games**: Add an option to simulate games instead of manual play.
+2. ~~**Simulated Games**: Add an option to simulate games instead of manual play.~~
 3. **Advanced AI (Markov Chains)**: Implement predictive modeling for better AI decisions.
 4. **Custom Strategy Weights**: Allow users to adjust the AI’s strategy mix (e.g., 40% random, 60% predictive/Markov).
 5. **Difficulty Levels**: Introduce selectable difficulty settings based on AI intelligence.
@@ -24,6 +24,12 @@ A Python-based Rock Paper Scissors game featuring an AI opponent that adapts to 
 - Added shorthand input support (r/p/s)
 - Cleaned up scoreboard and game flow
 - Added .gitignore and requirements.txt for environment management
+
+## What's New (April 29, 2025)
+- Added a new main menu and logo
+- Refactored for function reusability
+- Added a game_state variable to simplify tracking
+- Added the ability to simulate games
 
 ## Installation & Usage
 1. Clone this repository:
