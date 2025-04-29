@@ -75,7 +75,8 @@ def main():
             continue 
 
 def simulate():
-    print("test")
+    num_games = int(input("Enter number of games: "))
+    
 def play_rounds(game_state):
 
     while True:
