@@ -39,6 +39,8 @@ game_state = {
     
 
 def main():
+    print(Fore.CYAN + logo + Style.RESET_ALL)
+
     play_rounds(game_state)
 
 def play_rounds(game_state):
@@ -46,9 +48,7 @@ def play_rounds(game_state):
     while True:
         player_choice = get_player_choice() #Player picks a choice
 
-        if game_state["round_num"] == 1:
-            print(Fore.CYAN + logo + Style.RESET_ALL)
-        else:
+        if game_state["round_num"] != 1:
             clear_screen()
 
         print() #Empty line for formatting
