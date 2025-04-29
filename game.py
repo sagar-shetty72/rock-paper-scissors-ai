@@ -6,6 +6,7 @@ import os
 header = "=== ROCK PAPER SCISSORS AI ==="
 
 logo = r"""
+     ___           ___           ___                    ___                 
     /\  \         /\  \         /\  \                  /\  \          ___   
    /::\  \       /::\  \       /::\  \                /::\  \        /\  \  
   /:/\:\  \     /:/\:\  \     /:/\ \  \              /:/\:\  \       \:\  \ 
@@ -39,9 +40,7 @@ game_state = {
 
 def main():
 
-    print() #Empty line for formatting
     print(Fore.CYAN + logo + Style.RESET_ALL)
-    print(Fore.WHITE + "-" * 80 + Style.RESET_ALL)
     print() #Empty line for formatting
 
     print("1. Traditional (Turn-by-turn player input)")
