@@ -32,6 +32,8 @@ def main():
 def play_rounds(game_state):
 
     while True:
+        print() #Empty line for formatting
+        print(Fore.CYAN + header + Style.RESET_ALL)
         player_choice = get_player_choice()
         
         if game_state["round_num"] != 1:
@@ -40,9 +42,7 @@ def play_rounds(game_state):
         update_choice_counts(game_state, player_choice)
         
         ai_choice = get_smart_ai_choice(game_state)  # Smart AI picks a choice
-        
-        print() #Empty line for formatting
-        print(Fore.CYAN + header + Style.RESET_ALL)
+
         winner = game(player_choice, ai_choice, game_state)  # Determine winner
         print_round_results(player_choice, ai_choice, winner) # Print round result
         update_scores(game_state, winner)  # Update the scoreboard
