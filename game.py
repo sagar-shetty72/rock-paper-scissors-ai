@@ -5,7 +5,7 @@ import os
 
 header = "=== ROCK PAPER SCISSORS AI ==="
 
-logo = """
+logo = r"""
     /\  \         /\  \         /\  \                  /\  \          ___   
    /::\  \       /::\  \       /::\  \                /::\  \        /\  \  
   /:/\:\  \     /:/\:\  \     /:/\ \  \              /:/\:\  \       \:\  \ 
@@ -46,7 +46,9 @@ def play_rounds(game_state):
     while True:
         player_choice = get_player_choice() #Player picks a choice
 
-        if game_state["round_num"] != 1:
+        if game_state["round_num"] == 1:
+            print(Fore.CYAN + logo + Style.RESET_ALL)
+        else:
             clear_screen()
 
         print() #Empty line for formatting
