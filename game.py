@@ -40,12 +40,19 @@ game_state = {
 
 def main():
 
+    print()
     print(Fore.CYAN + logo + Style.RESET_ALL)
-    print() #Empty line for formatting
+    print()
+    print(Fore.WHITE + "-" * 80 + Style.RESET_ALL)  # Divider line
+    print()
 
     print("1. Traditional (Turn-by-turn player input)")
+    print()
     print("2. Simulated (Run any number of games and see results)")
+    print()
     print("3. Exit Game (I'm sad to see you go)")
+    print()
+    print(Fore.WHITE + "-" * 80 + Style.RESET_ALL)  # Divider line
     print()
 
  
