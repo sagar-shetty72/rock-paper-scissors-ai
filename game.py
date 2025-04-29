@@ -40,15 +40,17 @@ game_state = {
 def main():
     print(Fore.CYAN + logo + Style.RESET_ALL)
 
-    print("-------------------------------------")
-
+    print(Fore.YELLOW + "-" * 80 + Style.RESET_ALL)
+ 
     while True:
-        choice = input("Pick your poison (1, 2, 3): ")
+        choice = int(input("Pick your poison (1, 2, 3): "))
 
         if choice == 1:
             play_rounds(game_state)
+            break
         elif choice == 2:
             simulate(game_state)
+            break
         elif choice == 3:
             clear_screen()
             sys.exit()
