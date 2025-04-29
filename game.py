@@ -74,7 +74,7 @@ def main():
             continue 
 
 def simulate(game_state):
-
+    clear_screen()
     num_games = int(input("Enter number of games: "))
     game_count = 0
 
@@ -94,7 +94,12 @@ def simulate(game_state):
         game_count += 1
 
     game_state["round_num"] = game_count
+    print()
     print_scores(game_state)
+    print()
+    print_player_choices(game_state)
+    print()
+    print_ai_choices(game_state)
 
 
 def play_rounds(game_state):
@@ -236,6 +241,16 @@ def print_player_choices(game_state):
     print(Fore.BLUE + "Your choice distribution" + Style.RESET_ALL)
     print(" | ".join(f"{k} : {(v / total * 100):.2f}%" 
                   for k, v in sorted(game_state["player_choices"].items(), key=lambda item: item[1], reverse=True)))
+    print() # Empty line for formatting
+
+def print_ai_choices(game_state):
+    """ Displays AI's choice distribution percentages. """
+
+    total = sum(game_state["ai_choices"].values())
+    # Prints choices sorted by most frequent, with percentages
+    print(Fore.BLUE + "AI choice distribution" + Style.RESET_ALL)
+    print(" | ".join(f"{k} : {(v / total * 100):.2f}%" 
+                  for k, v in sorted(game_state["ai_choices"].items(), key=lambda item: item[1], reverse=True)))
     print() # Empty line for formatting
 
 def print_player_win_percent(game_state):
