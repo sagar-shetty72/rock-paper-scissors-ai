@@ -5,7 +5,19 @@ import os
 
 header = "=== ROCK PAPER SCISSORS AI ==="
 
- # Game state tracking scores and choice distribution
+logo = """
+    /\  \         /\  \         /\  \                  /\  \          ___   
+   /::\  \       /::\  \       /::\  \                /::\  \        /\  \  
+  /:/\:\  \     /:/\:\  \     /:/\ \  \              /:/\:\  \       \:\  \ 
+ /::\~\:\  \   /::\~\:\  \   _\:\~\ \  \            /::\~\:\  \      /::\__\
+/:/\:\ \:\__\ /:/\:\ \:\__\ /\ \:\ \ \__\          /:/\:\ \:\__\  __/:/\/__/
+\/_|::\/:/  / \/__\:\/:/  / \:\ \:\ \/__/          \/__\:\/:/  / /\/:/  /   
+   |:|::/  /       \::/  /   \:\ \:\__\                 \::/  /  \::/__/    
+   |:|\/__/         \/__/     \:\/:/  /                 /:/  /    \:\__\    
+   |:|  |                      \::/  /                 /:/  /      \/__/    
+    \|__|                       \/__/                  \/__/                """
+
+# Game state tracking scores and choice distribution
 game_state = {
     "scoreboard" : {
         "player": 0,
@@ -32,15 +44,15 @@ def main():
 def play_rounds(game_state):
 
     while True:
-        print() #Empty line for formatting
-        print(Fore.CYAN + header + Style.RESET_ALL)
-        player_choice = get_player_choice()
-        
+        player_choice = get_player_choice() #Player picks a choice
+
         if game_state["round_num"] != 1:
             clear_screen()
 
-        update_choice_counts(game_state, player_choice)
-        
+        print() #Empty line for formatting
+        print(Fore.CYAN + header + Style.RESET_ALL)
+
+        update_choice_counts(game_state, player_choice) # Player choices dictionary updated
         ai_choice = get_smart_ai_choice(game_state)  # Smart AI picks a choice
 
         winner = game(player_choice, ai_choice, game_state)  # Determine winner
@@ -49,7 +61,7 @@ def play_rounds(game_state):
         print_scores(game_state) # Print latest scoreboard
         print_player_choices(game_state) # Print player choice distribution
         print_player_win_percent(game_state) # Print player win %
-
+            
         game_state["round_num"] += 1
 
 
