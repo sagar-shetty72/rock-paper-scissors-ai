@@ -36,13 +36,27 @@ game_state = {
     },
     "round_num" : 1
 }
-    
 
 def main():
     print(Fore.CYAN + logo + Style.RESET_ALL)
 
-    play_rounds(game_state)
+    print("-------------------------------------")
 
+    while True:
+        choice = input("Pick your poison (1, 2, 3): ")
+
+        if choice == 1:
+            play_rounds(game_state)
+        elif choice == 2:
+            simulate(game_state)
+        elif choice == 3:
+            clear_screen()
+            sys.exit()
+        else:
+            continue  # Reprompt on invalid input
+
+def simulate():
+    print("test")
 def play_rounds(game_state):
 
     while True:
