@@ -43,7 +43,13 @@ def play_rounds(game_state):
         
         print() #Empty line for formatting
         print(Fore.CYAN + header + Style.RESET_ALL)
-        game(player_choice, ai_choice, game_state)  # Determine winner
+        winner = game(player_choice, ai_choice, game_state)  # Determine winner
+        print_round_results(player_choice, ai_choice, winner) # Print round result
+        update_scores(game_state, winner)  # Update the scoreboard
+        print_scores(game_state) # Print latest scoreboard
+        print_player_choices(game_state) # Print player choice distribution
+        print_player_win_percent(game_state) # Print player win %
+
         game_state["round_num"] += 1
 
 
@@ -121,23 +127,24 @@ def game(player, ai, game_state):
         ("paper", "rock"): "paper"
     }
 
-    print() # Empty line for formatting
-
     if player == ai:
-        print(Fore.YELLOW + f"You both chose {player}! It's a draw." + Style.RESET_ALL)
         winner = "ties"
     elif (player, ai) in winning_combinations:
-        print(Fore.GREEN + f"You chose {winning_combinations[(player, ai)]} and computer chose {ai}. Player prevails." + Style.RESET_ALL)
         winner = "player"
     else:
-        print(Fore.RED + f"Computer chose {ai} and you chose {player}! Computer is triumphant." + Style.RESET_ALL)
         winner = "ai"
 
-    update_scores(game_state, winner)  # Update the scoreboard
-    print_scores(game_state)
-    print_player_choices(game_state)
-    print_player_win_percent(game_state)
+    return winner
 
+def print_round_results(player, ai, winner):
+    print() # Empty line for formatting
+    
+    if winner == "ties":
+        print(Fore.YELLOW + f"You both chose {player}! It's a draw." + Style.RESET_ALL)
+    elif winner == "player":
+        print(Fore.GREEN + f"You chose {player} and computer chose {ai}. Player prevails." + Style.RESET_ALL)
+    else:
+        print(Fore.RED + f"Computer chose {ai} and you chose {player}! Computer is triumphant." + Style.RESET_ALL)
 
 def update_scores(game_state, winner):
     """ Updates game state based on winner. """
