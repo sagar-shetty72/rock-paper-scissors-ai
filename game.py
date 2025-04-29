@@ -55,7 +55,6 @@ def main():
     print(Fore.WHITE + "-" * 80 + Style.RESET_ALL)  # Divider line
     print()
 
- 
     while True:
         try:
             choice = int(input("Pick your poison (1, 2, 3): "))
@@ -74,9 +73,30 @@ def main():
         except ValueError:
             continue 
 
-def simulate():
+def simulate(game_state):
+
     num_games = int(input("Enter number of games: "))
-    
+    game_count = 0
+
+    for i in range(0, num_games):
+        player_choice = random.choice(["rock", "paper", "scissor"])
+        update_choice_counts(game_state, player_choice)
+
+        if game_state["round_num"] == 1:
+            ai_choice = get_ai_choice()
+        else:
+            ai_choice = get_smart_ai_choice(game_state)
+
+        update_ai_choice_counts(game_state, ai_choice)
+        winner = game(player_choice, ai_choice)
+        update_scores(game_state, winner)
+
+        game_count += 1
+
+    game_state["round_num"] = game_count
+    print_scores(game_state)
+
+
 def play_rounds(game_state):
 
     while True:
@@ -165,7 +185,7 @@ def predict_player_choice(game_state):
     return counter[player_move]  # Returns the move that beats the player's most frequent choice
 
 
-def game(player, ai, game_state):
+def game(player, ai):
     """ Runs a single round, determines the winner, and updates scores. """
 
     # Winning combinations (Player Move, AI Move) -> Winning Move
@@ -227,6 +247,10 @@ def print_player_win_percent(game_state):
 def update_choice_counts(game_state, player_choice):
     """ Updates player choice count dictionary. """
     game_state["player_choices"][player_choice] += 1 
+
+def update_ai_choice_counts(game_state, ai_choice):
+    """ Updates ai choice count dictionary. """
+    game_state["ai_choices"][ai_choice] += 1 
 
 def clear_screen():
     # Clears the terminal screen for better readability between rounds
