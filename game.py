@@ -22,6 +22,10 @@ def main():
         "scissor": 0
     }
 
+    play_rounds(score, player_choice_counts)
+
+def play_rounds(score, player_choice_counts):
+
     round_num = 1  # Keeps track of game rounds
 
     while True:
@@ -38,6 +42,7 @@ def main():
         print(Fore.CYAN + header + Style.RESET_ALL)
         game(player_choice, ai_choice, score, player_choice_counts, round_num)  # Determine winner
         round_num += 1
+
 
 def get_player_choice():
     """ Prompts player for a choice, ensures input is valid. """
