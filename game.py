@@ -5,43 +5,46 @@ import os
 
 header = "=== ROCK PAPER SCISSORS AI ==="
 
-def main():
-    """ Main function to handle game loop and tracking scores. """
-
-    # Scoreboard tracking wins, losses, and ties
-    score = {
+ # Game state tracking scores and choice distribution
+game_state = {
+    "scoreboard" : {
         "player": 0,
         "ai": 0,
         "ties": 0
-    }
-
-    # Tracks how often the player picks each choice
-    player_choice_counts = {
+    },
+    "player_choices" : {
         "rock": 0,
         "paper": 0,
         "scissor": 0
-    }
+    },
+    "ai_choices" : {
+        "rock": 0,
+        "paper": 0,
+        "scissor": 0
+    },
+    "round_num" : 1
+}
+    
 
-    play_rounds(score, player_choice_counts)
+def main():
+    play_rounds(game_state)
 
-def play_rounds(score, player_choice_counts):
-
-    round_num = 1  # Keeps track of game rounds
+def play_rounds(game_state):
 
     while True:
         player_choice = get_player_choice()
         
-        if round_num != 1:
+        if game_state["round_num"] != 1:
             clear_screen()
 
-        update_choice_counts(player_choice_counts, player_choice)
+        update_choice_counts(game_state, player_choice)
         
-        ai_choice = get_smart_ai_choice(player_choice_counts, round_num)  # Smart AI picks a choice
+        ai_choice = get_smart_ai_choice(game_state)  # Smart AI picks a choice
         
         print() #Empty line for formatting
         print(Fore.CYAN + header + Style.RESET_ALL)
-        game(player_choice, ai_choice, score, player_choice_counts, round_num)  # Determine winner
-        round_num += 1
+        game(player_choice, ai_choice, game_state)  # Determine winner
+        game_state["round_num"] += 1
 
 
 def get_player_choice():
@@ -80,23 +83,23 @@ def get_ai_choice():
     return random.choice(plays)
 
 
-def get_smart_ai_choice(player_choice_counts, round_num):
+def get_smart_ai_choice(game_state):
     """ Determines AI move: 70% predictive, 30% random. """
 
     strategy = random.choices(["random", "predictive"], weights=[0.3, 0.7])[0]  # 70% predictive AI
 
     # AI plays randomly for the first round since no data exists
-    if strategy == "random" or round_num == 1:
+    if strategy == "random" or game_state["round_num"] == 1:
         return get_ai_choice()
     else:
-        return predict_player_choice(player_choice_counts)
+        return predict_player_choice(game_state)
 
 
-def predict_player_choice(player_choice_counts):
+def predict_player_choice(game_state):
     """ Predicts player's most common move and counters it. """
 
     # Find the most common move
-    player_move = sorted(player_choice_counts.items(), key=lambda item: item[1], reverse=True)[0][0]
+    player_move = sorted(game_state["player_choices"].items(), key=lambda item: item[1], reverse=True)[0][0]
 
     # Dictionary to counter predicted move
     counter = {
@@ -108,7 +111,7 @@ def predict_player_choice(player_choice_counts):
     return counter[player_move]  # Returns the move that beats the player's most frequent choice
 
 
-def game(player, ai, score, player_choices, round_num):
+def game(player, ai, game_state):
     """ Runs a single round, determines the winner, and updates scores. """
 
     # Winning combinations (Player Move, AI Move) -> Winning Move
@@ -130,45 +133,45 @@ def game(player, ai, score, player_choices, round_num):
         print(Fore.RED + f"Computer chose {ai} and you chose {player}! Computer is triumphant." + Style.RESET_ALL)
         winner = "ai"
 
-    update_scores(score, winner)  # Update the scoreboard
-    print_scores(score, round_num)
-    print_player_choices(player_choices)
-    print_player_win_percent(score)
+    update_scores(game_state, winner)  # Update the scoreboard
+    print_scores(game_state)
+    print_player_choices(game_state)
+    print_player_win_percent(game_state)
 
 
-def update_scores(score, winner):
-    """ Updates score dictionary based on winner. """
-    score[winner] += 1
+def update_scores(game_state, winner):
+    """ Updates game state based on winner. """
+    game_state["scoreboard"][winner] += 1
 
 
-def print_scores(score, round_num):
+def print_scores(game_state):
     """ Prints the scoreboard in a clean format. """
     
-    print(Fore.MAGENTA + f"\n---- Round {round_num} -------" + Style.RESET_ALL)
-    for key, value in score.items():
+    print(Fore.MAGENTA + f"\n---- Round {game_state["round_num"]} -------" + Style.RESET_ALL)
+    for key, value in game_state["scoreboard"].items():
         print(f"{key.capitalize():<8} | {value}")
     print("--------------------\n")
 
 
-def print_player_choices(player_choices):
+def print_player_choices(game_state):
     """ Displays player's choice distribution percentages. """
 
-    total = sum(player_choices.values())
+    total = sum(game_state["player_choices"].values())
     # Prints choices sorted by most frequent, with percentages
     print(Fore.BLUE + "Your choice distribution" + Style.RESET_ALL)
     print(" | ".join(f"{k} : {(v / total * 100):.2f}%" 
-                  for k, v in sorted(player_choices.items(), key=lambda item: item[1], reverse=True)))
+                  for k, v in sorted(game_state["player_choices"].items(), key=lambda item: item[1], reverse=True)))
     print() # Empty line for formatting
 
-def print_player_win_percent(score):
+def print_player_win_percent(game_state):
 
-    win_percent = score["player"]/sum(score.values())
+    win_percent = game_state["scoreboard"]["player"]/sum(game_state["scoreboard"].values())
     print(f"Your win %: {win_percent*100:.2f}%")
     print()
 
-def update_choice_counts(choice_counts, choice):
+def update_choice_counts(game_state, player_choice):
     """ Updates player choice count dictionary. """
-    choice_counts[choice] += 1 
+    game_state["player_choices"][player_choice] += 1 
 
 def clear_screen():
     # Clears the terminal screen for better readability between rounds
